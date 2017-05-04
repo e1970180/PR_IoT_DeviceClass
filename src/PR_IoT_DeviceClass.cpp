@@ -1,25 +1,5 @@
 #include "PR_IoT_DeviceClass.h"
 
-/*
-bool	PR_IoT_DeviceClass::subscribe() {   //listen commands to the device
-                                            //ToDo? make virtual to be possible override to listen  more???
-	bool subscResult = false;
-
-    #ifdef PR_DEBUG_ON 
-        PR_DBG_SERIALDEVICE.print(PR_IoT_Node::getNodePrefix() + deviceName + "/" + "#  ");
-    #endif
-	
-	if (MQTTclient.subscribe( (PR_IoT_Node::getNodePrefix() + deviceName + "/command/" + "#").c_str() )) {
-    	PR_DBGTLN("Subscribe Success ")
-		subscResult = true; 
-	} else {
-		PR_DBGTLN("Subscribe fail")
-		subscResult = false;
-	};
-	return subscResult;
-}
-*/
-
 void	PR_IoT_DeviceClass::begin(uint16_t updatePeriod) {
 	_updatePeriod = updatePeriod;
 	_isBegin = true;    
@@ -34,15 +14,13 @@ void	PR_IoT_DeviceClass::loop() {
 	IoTtime_t	currentTime;
     
     if (_isBegin) {
-		if (NodeMQTT.isOnline()) {
+		
+		loopHW();			//do hardware specific 
+		
+		if (NodeMQTT.isOnline() && (_updatePeriod >=0) ) {	//do not update if _updatePeriod is negative
 			currentTime = IoTtime.now();
             
-            //Serial.print(currentTime);Serial.print(" ");Serial.print(_lastUpdateTime);Serial.print("   ");Serial.println(_updatePeriod);
-            
-			if ( ((currentTime - _lastUpdateTime) > _updatePeriod) || !_updatePeriod ) {	// time to update, 
-																							//if _updatePeriod=0 update every time
-				
-				//Serial.print(currentTime);Serial.print(" ");Serial.println(_lastUpdateTime);
+			if ( ((currentTime - _lastUpdateTime) > _updatePeriod) || !_updatePeriod ) {	// time to update, if _updatePeriod=0 update every time
 				_lastUpdateTime = currentTime;
 				update();
 			}

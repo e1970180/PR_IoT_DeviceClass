@@ -19,6 +19,7 @@ end		KEYWORD2
 loop		KEYWORD2	
 invoke		KEYWORD2
 update		KEYWORD2
+inMsgCallback	KEYWORD2
 
 ######################################
 # Constants (LITERAL1)
