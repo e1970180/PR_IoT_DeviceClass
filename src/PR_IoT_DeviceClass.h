@@ -6,22 +6,21 @@
 	//#include <PR_IoT_TimeClass.h>
 
 	#include <PR_IoT.h>
-
   
     class PR_IoT_DeviceClass {
     	public:
     			PR_IoT_DeviceClass(String name) 
     				:	deviceName(name), _lastUpdateTime(0)
     				{}
-            void	        setupHW() {};		                       //hardware setup
 	        void            announce();                                //send parametrs list to general topic  
     		void	        begin(uint16_t updatePeriod);
     		void	        end();
     		void	        loop();
-			virtual	void	loopHW() 			{};				
     		void	        invoke();
-            virtual	void	update()=0;
-			virtual void	inMsgCallback()=0;
+            virtual void	setupHW() 			{};		                       //hardware setup			
+			virtual	void	loopHW() 			{};				
+            virtual	void	update()			=0;
+			virtual void	inMsgCallback()		=0;
 			
     		const	String	deviceName;
     	protected:

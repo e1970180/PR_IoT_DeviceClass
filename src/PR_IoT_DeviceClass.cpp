@@ -14,12 +14,11 @@ void	PR_IoT_DeviceClass::loop() {
 	IoTtime_t	currentTime;
     
     if (_isBegin) {
-		
+												
 		loopHW();			//do hardware specific 
 		
-		if (NodeMQTT.isOnline() && (_updatePeriod >=0) ) {	//do not update if _updatePeriod is negative
+		if (NodeMQTT.isOnline() && (_updatePeriod >=0) ) {	//do not update if _updatePeriod is negative							
 			currentTime = IoTtime.now();
-            
 			if ( ((currentTime - _lastUpdateTime) > _updatePeriod) || !_updatePeriod ) {	// time to update, if _updatePeriod=0 update every time
 				_lastUpdateTime = currentTime;
 				update();
