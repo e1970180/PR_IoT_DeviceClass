@@ -48,14 +48,10 @@ void	PR_IoT_DeviceClass::invoke() {
 bool    PR_IoT_DeviceClass::postMsg(const String subTopic, const String payload) {
     //use MQTTclient om ESP or SerialMsgClient on AVR 
 
-	NodeMQTT.postMsg(deviceName + "/" + subTopic, payload);
+	NodeMQTT.postMsg(deviceName, subTopic, payload);
 	    
     PR_DBGV(deviceName); PR_DBGTLN(" post a msg");
 }
 
-
-	
-
-	
 	
 	
