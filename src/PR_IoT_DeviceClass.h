@@ -16,7 +16,7 @@
     		void	        begin(uint16_t updatePeriod);
     		void	        end();
     		void	        loop();
-    		void	        invoke();
+    		void	        invoke();									//ToDo add invoke(IoT_Msg &Msg) , it requres inMsgCallback(IoT_Msg &Msg)
             virtual void	setupHW() 			{};		                       //hardware setup			
 			virtual	void	loopHW() 			{};				
             virtual	void	update()			=0;
@@ -24,7 +24,7 @@
 			
     		const	String	deviceName;
     	protected:
-    		int 	   		 _updatePeriod;		//[s] how often to do update "0" means each loop, "negative" mean no period update, inly by invoke()
+    		int 	   		_updatePeriod;		//[s] how often to do update "0" means each loop, "negative" mean no period update, inly by invoke()
     		IoTtime_t	    _lastUpdateTime;
     		bool		    _isBegin = false;	//flag if begin or stopped
     

@@ -2,7 +2,8 @@
 
 void	PR_IoT_DeviceClass::begin(uint16_t updatePeriod) {
 	_updatePeriod = updatePeriod;
-	_isBegin = true;    
+	_isBegin = true;
+		
 }
 
 void	PR_IoT_DeviceClass::end() {
@@ -39,7 +40,7 @@ void	PR_IoT_DeviceClass::loop() {
 
 void	PR_IoT_DeviceClass::invoke() {
 	if (_isBegin && NodeMQTT.isOnline() ) {
-		_lastUpdateTime = IoTtime.now() - random(0, _updatePeriod/2);               //distributing update() events
+		_lastUpdateTime = IoTtime.now() - random(0, _updatePeriod/2);               	//distributing update() events
 		//if ( _lastUpdateTime > IoTtime.now() )  _lastUpdateTime = IoTtime.now();        //ToDO - remove if _lastUpdateTime is signed?
 		update();
 	}
