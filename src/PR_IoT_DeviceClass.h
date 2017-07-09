@@ -12,8 +12,8 @@
     			PR_IoT_DeviceClass(String name) 
     				:	deviceName(name), _lastUpdateTime(0)
     				{}
-	        void            announce();                                //send parametrs list to general topic  
-    		void	        begin(uint16_t updatePeriod);
+	        virtual void    announce();                                // 
+    		void	        begin(int16_t updatePeriod);
     		void	        end();
     		void	        loop();
     		void	        invoke();									//ToDo add invoke(IoT_Msg &Msg) , it requres inMsgCallback(IoT_Msg &Msg)
@@ -24,7 +24,7 @@
 			
     		const	String	deviceName;
     	protected:
-    		int 	   		_updatePeriod;		//[s] how often to do update "0" means each loop, "negative" mean no period update, inly by invoke()
+    		int16_t	   		_updatePeriod;		//[s] how often to do update "0" means in each loop, "negative" mean no update, only by invoke()
     		IoTtime_t	    _lastUpdateTime;
     		bool		    _isBegin = false;	//flag if begin or stopped
     

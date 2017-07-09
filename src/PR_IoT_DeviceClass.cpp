@@ -1,10 +1,14 @@
 #include "PR_IoT_DeviceClass.h"
 
-void	PR_IoT_DeviceClass::begin(uint16_t updatePeriod) {
+void	PR_IoT_DeviceClass::begin(int16_t updatePeriod) {
 	_updatePeriod = updatePeriod;
 	_isBegin = true;
-		
+	announce();	
 }
+
+void PR_IoT_DeviceClass::announce() {
+		postMsg("", "HELLO"); 
+	}
 
 void	PR_IoT_DeviceClass::end() {
 	_isBegin = false;
