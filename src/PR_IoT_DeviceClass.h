@@ -12,12 +12,13 @@
     			PR_IoT_DeviceClass(String name) 
     				:	deviceName(name), _lastUpdateTime(0)
     				{}
-	        virtual void    announce();                                // 
     		void	        begin(int16_t updatePeriod);
     		void	        end();
     		void	        loop();
     		void	        invoke();									//ToDo add invoke(IoT_Msg &Msg) , it requres inMsgCallback(IoT_Msg &Msg)
-            virtual void	setupHW() 			{};		                       //hardware setup			
+
+	        virtual void    announce();                                // 
+            virtual void	setupHW() 			{};		               //hardware setup			
 			virtual	void	loopHW() 			{};				
             virtual	void	update()			=0;
 			virtual void	inMsgCallback()		=0;
